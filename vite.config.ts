@@ -40,7 +40,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
                 return {
                     root: "./pages",
                     build: {
-                        outDir: "./dist"
+                        outDir: "../docs"
                     }
                 }
             } else if (mode === 'tests') {
