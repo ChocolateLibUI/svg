@@ -1,8 +1,8 @@
 {
   "name": "@chocolatelibui/svg",
   "version": "0.0.1",
-  "main": "dist/index.umd.js",
-  "module": "dist/esm.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/types.d.ts",
   "type": "module",
   "files": [
@@ -13,15 +13,15 @@
     "dev:tests": "vite -m test",
     "build:lib": "tsc && vite build -m lib",
     "build:pages": "tsc && vite build -m pages",
-    "build:tests": "tsc && vite build -m test",
+    "build:tests": "tsc && vite build -m tests",
     "serve:dev": "vite preview --mode pages",
-    "serve:tests": "vite preview --mode test",
+    "serve:tests": "vite preview --mode testServe",
     "test": "yarn run build:tests && start-server-and-test serve:tests http://localhost:999 'cypress run'",
     "watch": "start-server-and-test dev:tests http://localhost:999 'cypress open --e2e --browser edge'",
     "prepublishOnly": "yarn run test && yarn run build:lib && yarn run build:pages"
   },
   "dependencies": {
-    "@chocolatelib/math": "^0.0.1"
+    "@chocolatelib/math": "^0.0.2"
   },
   "devDependencies": {
     "cypress": "^11.2.0",

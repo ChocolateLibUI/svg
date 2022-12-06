@@ -1,22 +1,25 @@
-import { resolve } from 'path'
+import { resolve, } from 'path'
+import { renameSync } from 'fs'
 import { defineConfig } from 'vite'
 import { name, dependencies } from "./package.json"
 import dts from "vite-plugin-dts"
 
-console.log(Object.keys(dependencies));
-
-
 export default defineConfig(({ command, mode, ssrBuild }) => {
+    console.log(command, mode);
+
     switch (command) {
         case 'serve':
             if (mode === 'pages') {
                 return {
                     server: {
                         host: true,
-                        port: 666
+                        port: 666,
+                    },
+                    build: {
+                        outDir: "../docs",
                     },
                     preview: {
-                        port: 999
+                        port: 666
                     },
                     root: "./pages"
                 }
@@ -44,12 +47,13 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
                     },
                     base: ''
                 }
-            } else if (mode === 'tests') {
+            } else if (mode === 'tests' || mode === 'production') {
                 return {
                     root: "./cypress/pages",
                     build: {
                         outDir: "./dist"
-                    }
+                    },
+                    base: ''
                 }
             } else {
                 return {
@@ -58,14 +62,17 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
                             entry: resolve(__dirname, 'src/index.ts'),
                             name: name,
                             fileName: 'index',
-                            formats: ['es', 'umd'],
+                            formats: ['es', 'cjs'],
                         },
                         rollupOptions: {
                             external: Object.keys(dependencies)
                         },
                     },
                     plugins: [dts({
-                        rollupTypes: true
+                        rollupTypes: true,
+                        afterBuild() {
+                            renameSync(resolve(__dirname, 'dist/types.d.ts'), resolve(__dirname, 'dist/index.d.ts'))
+                        },
                     })]
                 }
             }
