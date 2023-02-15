@@ -1,6 +1,6 @@
 {
   "name": "@chocolatelibui/svg",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,9 +20,6 @@
     "watch": "start-server-and-test dev:tests http://localhost:999 'cypress open --e2e --browser edge'",
     "prepublishOnly": "yarn run test && yarn run build:lib && yarn run build:pages"
   },
-  "dependencies": {
-    "@chocolatelib/math": "^0.0.2"
-  },
   "devDependencies": {
     "cypress": "^11.2.0",
     "cypress-vite": "^1.2.1",
@@ -41,5 +38,8 @@
   "bugs": {
     "url": "https://github.com/ChocolateLibUI/svg/issues"
   },
-  "homepage": "https://github.com/ChocolateLibUI/svg#readme"
+  "homepage": "https://github.com/ChocolateLibUI/svg#readme",
+  "dependencies": {
+    "@chocolatelib/math": "<1.0.0 || ^1.0.0"
+  }
 }
